@@ -10,7 +10,7 @@ export default class App extends React.PureComponent {
     users: [],
     randomUsers: [],
     favUsers: [],
-    usersIndex: []
+    usersIndexes: []
   }
   //get data from url
   fetchUsers = () => {
@@ -23,6 +23,7 @@ export default class App extends React.PureComponent {
           randomUsers: this.getRandomUsers(users)
         })
       })
+      .catch(e => console.log(e));
   }
   // get random users list
   getRandomUsers = users => {
@@ -32,7 +33,7 @@ export default class App extends React.PureComponent {
     }
     this.setState({
       randomUsers,
-      usersIndex: [],
+      usersIndexes: []
     })
     return randomUsers;
   }
@@ -42,8 +43,16 @@ export default class App extends React.PureComponent {
     this.getRandomUsers(this.state.randomUsers)
   }
   // get favorite users list
-  onFavorite = user => {
-    const { favUsers, users } = this.state;
+  onFavorite = (user, index) => {
+    const { favUsers, users, usersIndexes } = this.state;
+    if (usersIndexes.includes(index)) {
+      return;
+    }
+    else {
+      this.setState({
+        usersIndexes: [ ...usersIndexes, index]
+      })
+    }
     const favUser = favUsers.find((item) => item.id === user.id);
     if (favUser) {
       favUser.count++;
@@ -77,7 +86,7 @@ export default class App extends React.PureComponent {
   }
 
   render() {
-    const { users, randomUsers, favUsers, usersIndex } = this.state
+    const { users, randomUsers, favUsers, usersIndexes } = this.state
 
     return (
       <div>
@@ -90,7 +99,7 @@ export default class App extends React.PureComponent {
               users={randomUsers}
               favoriteUsers={favUsers}
               onFavorite={this.onFavorite}
-              usersIndex={usersIndex}
+              usersIndexes={usersIndexes}
             />)}
         <button style={{
           margin: 'auto',
