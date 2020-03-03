@@ -12,7 +12,7 @@ export default function RandomUsers({ users, onFavorite }) {
                             textAlign: 'center',
                             display: 'inline-block',
                         }}
-                        onClick={() => onFavorite(item)}>
+                        onClick={() => onFavorite(item, index)}>
                         <img width='150px'
                             style={{
                                 marginLeft: '75px',
