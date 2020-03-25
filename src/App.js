@@ -4,6 +4,8 @@ import Header from './Header/Header';
 import RandomUsers from './RandomUsers/RandomUsers';
 import FavoriteUsers from './FavoriteUsers/FavoriteUsers';
 
+import './App.css';
+
 export default class App extends React.PureComponent {
   state = {
     isLoading: true,
@@ -92,20 +94,16 @@ export default class App extends React.PureComponent {
       <div>
         <Header title={'Random Users'} />
         {this.state.isLoading
-          ? <h2>Loading...</h2>
+          ? <h2 className = 'loading'>Loading...</h2>
           : !users.length
-            ? <h1>You Win!</h1>
+            ? <h1 className = 'win'>You Win!</h1>
             : (<RandomUsers
               users={randomUsers}
               favoriteUsers={favUsers}
               onFavorite={this.onFavorite}
               usersIndexes={usersIndexes}
             />)}
-        <button style={{
-          margin: 'auto',
-          width: '1300px',
-          textAlign: 'center'
-        }}
+        <button className = 'button' 
           onClick={() => this.getRandomUsers(users)}>Update list</button>
         <Header title={'Favorite Users '} value={favUsers.length} />
         <FavoriteUsers favUsers={favUsers} />
