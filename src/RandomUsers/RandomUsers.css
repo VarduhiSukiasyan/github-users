@@ -1,0 +1,15 @@
+.Random-users {
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+}
+.Random-img {
+    margin-left: 75px;
+    margin-right: 75px;
+    justify-content: flex-end;
+    width: 150px;
+    
+}
+#border {
+    border: 5px solid #FF0000;
+}
