@@ -1,25 +1,20 @@
 import React from 'react';
 
-export default function RandomUsers({ users, onFavorite }) {
-   
+import './RandomUsers.css';
+
+export default function RandomUsers({ users, onFavorite, favoriteUsers }) {
+
     return (
-        <div>
+        <div >
             {users.map((item, index) => {
                 return (
-                    <div key={index}
-                        style={{
-                            cursor: 'pointer',
-                            textAlign: 'center',
-                            display: 'inline-block',
-                        }}
+                    <div className='Random-users'
+                        key={index}
                         onClick={() => onFavorite(item, index)}>
-                        <img width='150px'
-                            style={{
-                                marginLeft: '75px',
-                                marginRight: '75px',
-                                justifyContent: 'flex'
-                            }}
-                            src={item.avatar_url}></img>
+                        <img className='Random-img'
+                            src = {item.avatar_url}
+                            id = {favoriteUsers.find(favoriteUser => favoriteUser.id === item.id) ? 'border' : ''}
+                        ></img>
                         <h3>{item.login}</h3>
                     </div>
                 )
@@ -27,4 +22,3 @@ export default function RandomUsers({ users, onFavorite }) {
         </div>
     )
 }
-
